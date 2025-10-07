@@ -1,0 +1,39 @@
+{
+  "name": "raagsan_platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "echo 'no linter configured'",
+    "import:folder": "node scripts/import_from_folder.js",
+    "import:sepow": "node scripts/import_from_folder.js ./sepow_photos sepow 'SEPOW Photos' gallery",
+    "seed:sepow:headings": "node scripts/add_sepow_headings.js",
+    "fix:sepow": "node scripts/fix_sepow_story.js",
+    "seed:sepow:content": "node scripts/seed_sepow_content.js",
+    "seed:sepow:real": "node scripts/add_sepow_real_content.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^2.7.0",
+    "dotenv": "^16.6.1",
+    "mongoose": "^8.19.0",
+    "next": "^15.5.4",
+    "next-auth": "^4.24.11",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14"
+  }
+}
