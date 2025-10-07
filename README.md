@@ -1,137 +1,287 @@
-# Raagsan Storytelling Platform
+# Raagsan Platform
 
-A dynamic storytelling platform for hosting multiple projects, datasets, and stories under one unified digital ecosystem.
+A scalable digital storytelling platform that transforms static storytelling sites into dynamic platforms capable of hosting multiple projects, datasets, and stories. Built for Raagsan's mission to provide strategic and analytical consulting services across Somalia.
 
-## Features
+## 🌟 Features
 
-- **Dynamic Story Management**: Create and manage multiple projects with their own stories
-- **Rich Content Editor**: Block-based editor for text, images, and embeds
-- **Cloudinary Integration**: Optimized image hosting with auto WebP conversion
-- **Authentication**: Secure admin access for content management
-- **Responsive Design**: Mobile-friendly with Raagsan branding
+### Core Functionality
+- **Multi-Project Management**: Host multiple storytelling projects under one unified platform
+- **Dynamic Content Management**: Admin portal for easy content creation and management
+- **Rich Storytelling**: Block-based editor supporting text, images, embeds, and multimedia
+- **Responsive Design**: Mobile-first design with Raagsan branding
+- **Secure Authentication**: NextAuth.js integration for admin access
 
-## Tech Stack
+### Content Management
+- **Project Visibility Control**: Show/hide projects with simple toggles
+- **Project Ordering**: Drag-and-drop or up/down controls for project arrangement
+- **Status Management**: Draft/Published status for content workflow
+- **Date Management**: Start and end date tracking for projects
+- **Image Optimization**: Automatic Cloudinary integration with WebP conversion
 
-- **Frontend**: Next.js 15 (App Router) + TailwindCSS
-- **Backend**: Next.js API routes + Mongoose
-- **Database**: MongoDB Atlas
-- **Authentication**: NextAuth.js
-- **Image Storage**: Cloudinary
-- **Deployment**: Vercel
+### User Experience
+- **Professional Branding**: Consistent Raagsan visual identity
+- **Fast Loading**: Optimized images and static generation
+- **SEO Ready**: Server-side rendering and meta tags
+- **Accessibility**: WCAG compliant design patterns
 
-## Getting Started
+## 🛠 Tech Stack
+
+### Frontend
+- **Next.js 15** - React framework with App Router
+- **TailwindCSS** - Utility-first CSS framework
+- **React 19** - Latest React with concurrent features
+
+### Backend
+- **Next.js API Routes** - Serverless API endpoints
+- **Mongoose** - MongoDB object modeling
+- **NextAuth.js** - Authentication framework
+
+### Database & Storage
+- **MongoDB Atlas** - Cloud-hosted NoSQL database
+- **Cloudinary** - Image storage and optimization
+
+### Deployment
+- **Vercel** - Serverless deployment platform
+- **GitHub** - Version control and CI/CD
+
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 18+ 
 - MongoDB Atlas account
 - Cloudinary account
-- Vercel account (for deployment)
+- Git
 
-### Local Development
+### Installation
 
-1. **Clone and install dependencies**
+1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd raagsan-platform
+   git clone https://github.com/omar-mohamud/raagsanplatform.git
+   cd raagsanplatform
+   ```
+
+2. **Install dependencies**
+   ```bash
    npm install
    ```
 
-2. **Set up environment variables**
-   Create `.env.local` with:
+3. **Set up environment variables**
+   Create `.env.local` in the root directory:
    ```env
-   MONGODB_URI="mongodb+srv://username:password@cluster.mongodb.net/database"
-   NEXTAUTH_SECRET="your-secret-key"
-   NEXTAUTH_URL="http://localhost:3000"
-   ADMIN_TOKEN="your-admin-token"
-   CLOUDINARY_CLOUD_NAME="your-cloud-name"
-   CLOUDINARY_API_KEY="your-api-key"
-   CLOUDINARY_API_SECRET="your-api-secret"
+   # Database
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/raagsan_platform?retryWrites=true&w=majority
+   
+   # Authentication
+   NEXTAUTH_SECRET=your-super-secret-key-here-change-in-production
+   NEXTAUTH_URL=http://localhost:3000
+   
+   # Admin Credentials
+   ADMIN_USER=admin
+   ADMIN_PASS=admin123
+   
+   # Cloudinary (Image Storage)
+   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_API_KEY=your-api-key
+   CLOUDINARY_API_SECRET=your-api-secret
+   
+   # API Security
+   ADMIN_TOKEN=your-admin-token-here
    ```
 
-3. **Whitelist your IP in MongoDB Atlas**
-   - Go to MongoDB Atlas Console
-   - Security → Network Access
-   - Add your current IP address
+4. **Configure MongoDB Atlas**
+   - Create a MongoDB Atlas cluster
+   - Add your IP address to the whitelist
+   - Create a database user with read/write permissions
+   - Update the `MONGODB_URI` in your `.env.local`
 
-4. **Run the development server**
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Access the application**
-   - Homepage: http://localhost:3000
-   - Admin: http://localhost:3000/login
+6. **Access the application**
+   - **Homepage**: http://localhost:3000
+   - **Admin Portal**: http://localhost:3000/admin/login
+   - **Login Credentials**: admin / admin123 (change in production)
 
-### Content Management
+## 📁 Project Structure
 
-- **Create Projects**: Use the admin interface at `/admin`
-- **Add Stories**: Create stories with rich content blocks
-- **Upload Images**: Images are automatically uploaded to Cloudinary
-- **Manage Content**: Edit projects and stories through the admin panel
+```
+raagsanplatform/
+├── app/                          # Next.js App Router
+│   ├── api/                     # API endpoints
+│   │   ├── admin/               # Admin-specific APIs
+│   │   ├── auth/                # Authentication APIs
+│   │   ├── projects/            # Project management APIs
+│   │   └── uploads/             # File upload APIs
+│   ├── admin/                   # Admin interface
+│   │   ├── login/               # Admin login page
+│   │   └── page.js              # Admin dashboard
+│   ├── projects/                # Project pages
+│   │   └── [slug]/              # Dynamic project routes
+│   ├── globals.css              # Global styles
+│   ├── layout.js                # Root layout
+│   └── page.js                  # Homepage
+├── components/                   # Reusable React components
+│   ├── GlobalNav.js             # Navigation component
+│   ├── PageBackground.js        # Background component
+│   ├── Toast.js                 # Notification component
+│   └── CloudinaryUpload.js      # Image upload component
+├── lib/                         # Utility libraries
+│   ├── authOptions.js           # NextAuth configuration
+│   ├── dbConnect.js             # Database connection
+│   ├── fallbackData.js          # Fallback data for offline mode
+│   └── cloudinary.js            # Cloudinary configuration
+├── models/                      # Mongoose data models
+│   ├── Project.js               # Project schema
+│   └── Story.js                 # Story schema
+├── scripts/                     # Database and utility scripts
+├── public/                      # Static assets
+└── sepow_photos/               # Sample project assets
+```
 
-### Available Scripts
+## 🎯 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run import:sepow` - Import SEPOW photos and create gallery
-- `npm run seed:sepow:real` - Add real SEPOW content
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
 
-## Deployment
+# Content Management
+npm run import:sepow # Import SEPOW photos and create gallery
+npm run seed:sepow:real # Add real SEPOW content
 
-### Vercel Deployment
+# Database
+npm run seed:sepow:headings  # Add SEPOW section headings
+npm run fix:sepow           # Fix SEPOW story content
+```
+
+## 🔧 Admin Portal Features
+
+### Project Management
+- **Visibility Control**: Toggle projects on/off
+- **Status Management**: Set projects as draft or published
+- **Ordering**: Reorder projects with up/down controls
+- **Date Tracking**: Set start and end dates
+- **Content Viewing**: View full project content
+
+### Content Creation
+- **Rich Text Editor**: Block-based editor for stories
+- **Image Upload**: Direct Cloudinary integration
+- **Media Embedding**: Support for external content
+- **SEO Optimization**: Meta tags and descriptions
+
+## 🌐 Deployment
+
+### Vercel Deployment (Recommended)
 
 1. **Connect to Vercel**
-   - Push code to GitHub
-   - Connect repository to Vercel
-   - Add environment variables in Vercel dashboard
+   - Push your code to GitHub
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Configure environment variables
 
-2. **Required Environment Variables**
-   - `MONGODB_URI`
-   - `NEXTAUTH_SECRET`
-   - `NEXTAUTH_URL` (your production domain)
-   - `ADMIN_TOKEN`
-   - `CLOUDINARY_CLOUD_NAME`
-   - `CLOUDINARY_API_KEY`
-   - `CLOUDINARY_API_SECRET`
+2. **Required Environment Variables for Production**
+   ```env
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/raagsan_platform?retryWrites=true&w=majority
+   NEXTAUTH_SECRET=your-production-secret-key
+   NEXTAUTH_URL=https://your-domain.vercel.app
+   ADMIN_USER=admin
+   ADMIN_PASS=your-secure-password
+   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_API_KEY=your-api-key
+   CLOUDINARY_API_SECRET=your-api-secret
+   ADMIN_TOKEN=your-secure-admin-token
+   ```
 
 3. **Deploy**
-   - Vercel will automatically deploy on push to main branch
-   - Custom domain can be configured in Vercel dashboard
+   - Vercel automatically deploys on push to main branch
+   - Custom domains can be configured in Vercel dashboard
+   - Environment variables are managed in Vercel dashboard
 
-## Project Structure
+### Manual Deployment
 
-```
-raagsan-platform/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   ├── admin/             # Admin pages
-│   ├── projects/          # Project pages
-│   ├── stories/           # Story pages
-│   └── globals.css        # Global styles
-├── components/            # React components
-├── lib/                   # Utilities
-├── models/                # Mongoose models
-├── scripts/               # Database scripts
-└── public/                # Static assets
+```bash
+# Build the application
+npm run build
+
+# Deploy to Vercel
+npx vercel --prod
 ```
 
-## Contributing
+## 🔒 Security Features
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+- **Environment Variables**: Sensitive data stored securely
+- **Authentication**: NextAuth.js with secure sessions
+- **API Protection**: Admin-only endpoints with session validation
+- **Input Validation**: Server-side validation for all inputs
+- **CORS Configuration**: Proper cross-origin resource sharing
 
-## License
+## 🎨 Branding & Design
 
-© 2024 Raagsan. All rights reserved.
+### Raagsan Brand Colors
+- **Primary Blue**: #035F87 (Raagsan Blue)
+- **Secondary Orange**: #FF6B35 (Raagsan Orange)
+- **Accent Red**: #DC2626 (GIZ Red - for specific elements)
+- **Text**: #000000 (Black) / #FFFFFF (White)
 
-## Contact
+### Typography
+- **Primary Font**: Inter (Google Fonts)
+- **Fallback**: system-ui, sans-serif
 
-- Email: info@raagsan.com
-- Website: [raagsan.com](https://raagsan.com)
-- Locations: Nairobi · Hargeisa · Mogadishu
+### Responsive Design
+- **Mobile First**: Optimized for mobile devices
+- **Breakpoints**: sm (640px), md (768px), lg (1024px), xl (1280px)
+- **Fluid Typography**: Uses clamp() for responsive text sizing
 
+## 📊 Performance
+
+- **Static Generation**: Pre-rendered pages for fast loading
+- **Image Optimization**: Automatic WebP conversion via Cloudinary
+- **Code Splitting**: Automatic bundle optimization
+- **Caching**: Strategic caching for API responses
+- **CDN**: Global content delivery via Vercel
+
+## 🤝 Contributing
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Make your changes**: Follow the existing code style
+4. **Test thoroughly**: Ensure all functionality works
+5. **Commit your changes**: `git commit -m 'Add amazing feature'`
+6. **Push to the branch**: `git push origin feature/amazing-feature`
+7. **Open a Pull Request**: Provide detailed description of changes
+
+### Development Guidelines
+- Follow the existing code structure and naming conventions
+- Add comments for complex logic
+- Test on multiple devices and browsers
+- Ensure accessibility compliance
+- Update documentation for new features
+
+## 📝 License
+
+© 2024 Raagsan – Strategic and Consulting Social Enterprise. All rights reserved.
+
+## 📞 Contact & Support
+
+### Raagsan Team
+- **Email**: [info@raagsan.com](mailto:info@raagsan.com)
+- **Website**: [raagsan.com](https://raagsan.com)
+- **Main Site**: [raagsan.com](https://raagsan.com)
+
+### Office Locations
+- **Nairobi**: Westlands, Nairobi
+- **Hargeisa**: Burj Omar 2, Jigjiga Yar Main road, Hargeisa
+- **Mogadishu**: Airport Road, Mogadishu
+
+### Technical Support
+For technical issues or questions about the platform:
+- Create an issue in this repository
+- Contact the development team
+- Check the documentation above
+
+---
+
+**Built with ❤️ for Raagsan's mission to empower communities through strategic consulting and storytelling.**
