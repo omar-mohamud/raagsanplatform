@@ -161,6 +161,9 @@
 .text-center {
   text-align: center;
 }
+.text-\[\#035F87\] {
+  color: #035F87;
+}
 .uppercase {
   text-transform: uppercase;
 }
@@ -303,7 +306,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   background: #ffffff;
 }
 .project-page .page-bg {
-  background: url("https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/fullbleed_01") center/cover no-repeat fixed;
+  background: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1920,f_auto,q_auto/raagsan/sepow/fullbleed_01") center/cover no-repeat fixed;
   filter: saturate(105%);
 }
 .project-page .page-bg::after {
@@ -314,7 +317,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   pointer-events: none;
 }
 .project-page .page-bg {
-  background: url("https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/fullbleed_01") center/cover no-repeat fixed;
+  background: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1920,f_auto,q_auto/raagsan/sepow/fullbleed_01") center/cover no-repeat fixed;
   filter: saturate(105%);
 }
 .project-page .page-bg::after {
@@ -334,11 +337,11 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   z-index: 10;
   background: linear-gradient(105deg, var(--orange) 0 25%, var(--brand) 25% 100%);
   color: #fff;
-  padding: clamp(8px, 2vw, 16px) 0;
+  padding: clamp(4px, 1vw, 8px) 0;
 }
 @media (max-width: 768px) {
   .brand-header {
-    padding: 12px 0;
+    padding: 6px 0;
   }
   .brand-inner {
     flex-direction: row;
@@ -354,7 +357,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
 }
 @media (max-width: 480px) {
   .brand-header {
-    padding: 8px 0;
+    padding: 4px 0;
   }
   .brand-email {
     font-size: 0.75rem;
@@ -368,8 +371,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  min-height: 56px;
+  padding: 6px 20px;
+  min-height: 32px;
 }
 .brand-email {
   color: #fff;
@@ -472,8 +475,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   }
 }
 .who-we-are-section {
-  margin: 6rem 0;
-  padding: 3rem 2rem;
+  margin: 2rem 0;
+  padding: 2rem 1.5rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
   background: linear-gradient(135deg, rgba(3, 95, 135, 0.05) 0%, rgba(232, 131, 17, 0.05) 100%) !important;
@@ -497,7 +500,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 .who-we-are-title {
@@ -524,16 +527,16 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   font-size: 2.5rem;
   font-weight: 800;
   line-height: 1.2;
-  margin: 0 0 2.5rem 0;
+  margin: 0 0 1.5rem 0;
   text-shadow: 0 2px 4px rgba(3, 95, 135, 0.1);
   position: relative;
 }
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding: 1.5rem 0;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
 }
 .service-item {
   display: flex;
@@ -660,8 +663,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   }
   .who-we-are-section,
   .raagsan-section {
-    padding: 2.5rem 1.5rem;
-    margin: 4rem 0;
+    padding: 2rem 1.25rem;
+    margin: 2.5rem 0;
   }
   .who-we-are-section .cta-row,
   .raagsan-section .cta-row {
@@ -689,8 +692,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   }
   .who-we-are-section,
   .raagsan-section {
-    padding: 2rem 1.25rem;
-    margin: 3rem 0;
+    padding: 1.75rem 1rem;
+    margin: 2rem 0;
   }
   .who-we-are-section .cta-row,
   .raagsan-section .cta-row {
@@ -718,8 +721,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   }
   .who-we-are-section,
   .raagsan-section {
-    padding: 1.5rem 1rem;
-    margin: 2.5rem 0;
+    padding: 1.25rem 0.75rem;
+    margin: 1.5rem 0;
   }
   .who-we-are-header,
   .raagsan-section-header {
@@ -868,7 +871,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   opacity: 0.8;
 }
 .homepage-section {
-  padding: 80px 0;
+  padding: 40px 0;
   background: white;
 }
 .homepage-h2 {
@@ -974,7 +977,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
 .hero-media {
   position: absolute;
   inset: 0;
-  background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/hero");
+  background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1920,f_auto,q_auto/raagsan/sepow/hero");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -989,6 +992,15 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
 }
 .hero-inner {
   position: relative;
+}
+.hero .h1 {
+  color: var(--giz);
+}
+.hero .lead {
+  color: #ffffff;
+}
+.hero .kicker {
+  color: var(--orange);
 }
 .kicker {
   letter-spacing: .08em;
@@ -1073,7 +1085,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   align-items: center;
 }
 .who-we-are-section .cta-row {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   gap: 16px;
   display: flex;
   flex-direction: row;
@@ -1109,8 +1121,8 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   transform: translateY(-2px);
 }
 .raagsan-section {
-  margin: 4rem 0;
-  padding: 3rem 2rem;
+  margin: 2rem 0;
+  padding: 2rem 1.5rem;
   background: linear-gradient(135deg, rgba(3, 95, 135, 0.05) 0%, rgba(232, 131, 17, 0.05) 100%);
   border-top: 2px solid var(--brand);
   border-bottom: 2px solid var(--brand);
@@ -1131,7 +1143,7 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 .raagsan-section-title {
@@ -1158,12 +1170,12 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   font-size: 2.5rem;
   font-weight: 800;
   line-height: 1.2;
-  margin: 0 0 2.5rem 0;
+  margin: 0 0 1.5rem 0;
   text-shadow: 0 2px 4px rgba(3, 95, 135, 0.1);
   position: relative;
 }
 .raagsan-section .cta-row {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   gap: 16px;
   display: flex;
   flex-direction: row;
@@ -1430,8 +1442,8 @@ p {
 .site-footer {
   background: var(--brand);
   color: #fff;
-  padding: clamp(40px, 8vw, 60px) 0 20px;
-  margin-top: 60px;
+  padding: clamp(30px, 6vw, 40px) 0 20px;
+  margin-top: 40px;
 }
 .footer-inner {
   max-width: 1200px;
@@ -1571,12 +1583,12 @@ p {
     padding-right: clamp(12px, 3vw, 24px);
   }
   .homepage-section {
-    margin: clamp(3rem, 8vw, 5rem) 0;
-    padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+    margin: clamp(2rem, 4vw, 3rem) 0;
+    padding: clamp(1rem, 3vw, 1.5rem) 0;
   }
   .who-we-are-section {
-    margin: clamp(3rem, 6vw, 4rem) 0;
-    padding: clamp(1.5rem, 4vw, 2rem);
+    margin: clamp(1.5rem, 3vw, 2rem) 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
   }
 }
 @media (hover: none) and (pointer: coarse) {

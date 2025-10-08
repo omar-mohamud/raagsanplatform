@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }) {
         <section id="intro" className="section-pad">
           <div className="container-lg overlap-wrap left">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/intro" alt="Introduction" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/intro" alt="Introduction" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }) {
         {/* Full bleed photo */}
         <figure className="photo-block">
           <div className="photo-wrap">
-            <img src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/fullbleed_01" alt="Field interview moment" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_1200,f_auto,q_auto/raagsan/sepow/fullbleed_01" alt="Field interview moment" loading="lazy" decoding="async" />
             <div className="photo-overlay"></div>
           </div>
           <figcaption>Photo: Raagsan field team</figcaption>
@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }) {
         <section id="objectives_method" className="section-pad band">
           <div className="container-lg overlap-wrap right">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/objectives" alt="Objectives" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/objectives" alt="Objectives" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -119,7 +119,7 @@ export default async function ProjectPage({ params }) {
         <section id="demographics" className="section-pad">
           <div className="container-lg overlap-wrap split">
             <figure className="media-wrap overlap-img corner">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/demographics" alt="Demographics" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/demographics" alt="Demographics" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -142,7 +142,7 @@ export default async function ProjectPage({ params }) {
         <section id="services" className="section-pad band">
           <div className="container-lg overlap-wrap right">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/social" alt="Social services" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/social" alt="Social services" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -166,7 +166,7 @@ export default async function ProjectPage({ params }) {
         <section id="income_food" className="section-pad">
           <div className="container-lg overlap-wrap left">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/food" alt="Food" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/food" alt="Food" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -191,7 +191,7 @@ export default async function ProjectPage({ params }) {
         <section id="social_capital" className="section-pad band">
           <div className="container-lg overlap-wrap right">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/business" alt="Social capital" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/business" alt="Social capital" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -230,7 +230,7 @@ export default async function ProjectPage({ params }) {
         <section id="human_stories" className="section-pad band">
           <div className="container-lg overlap-wrap left">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/field-voices" alt="Field voices" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/field-voices" alt="Field voices" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -247,7 +247,7 @@ export default async function ProjectPage({ params }) {
         <section id="conclusions" className="section-pad band">
           <div className="container-lg overlap-wrap left">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/conclusions" alt="Conclusions" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/conclusions" alt="Conclusions" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">
@@ -264,7 +264,7 @@ export default async function ProjectPage({ params }) {
         <section id="recommendations" className="section-pad">
           <div className="container-lg overlap-wrap right">
             <figure className="media-wrap overlap-img">
-              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/raagsan/sepow/recommendations" alt="Recommendations" loading="lazy" decoding="async" />
+              <img className="media" src="https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/recommendations" alt="Recommendations" loading="lazy" decoding="async" />
               <figcaption>Photo: Raagsan field team</figcaption>
             </figure>
             <div className="card">

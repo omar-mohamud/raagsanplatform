@@ -145,12 +145,9 @@ export default function AdminLogin() {
               </div>
 
               {error && (
-                <div className="rounded-xl bg-red-50 border border-red-200 p-4">
-                  <div className="flex items-center">
-                    <svg className="h-5 w-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <div className="text-sm font-medium text-red-700">{error}</div>
+                <div className="text-center">
+                  <div className="text-xs text-[#035F87] font-medium">
+                    Username or password is incorrect
                   </div>
                 </div>
               )}
@@ -159,7 +156,8 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-xl shadow-lg text-sm font-medium text-white bg-gradient-to-r from-[#035F87] to-[#046E9C] hover:from-[#046E9C] hover:to-[#035F87] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#035F87] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-xl shadow-lg text-sm font-medium bg-gradient-to-r from-[#035F87] to-[#046E9C] hover:from-[#046E9C] hover:to-[#035F87] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#035F87] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{ color: 'white' }}
                 >
                   {loading ? "Signing in..." : "Sign In"}
                 </button>

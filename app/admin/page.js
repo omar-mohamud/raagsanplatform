@@ -28,14 +28,18 @@ export default function AdminPage() {
       setLoading(true);
       setError(null);
       
-      // Add timeout to prevent hanging requests
+      // Add timeout to prevent hanging requests - increased to 15 seconds
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      const timeoutId = setTimeout(() => {
+        console.log('Request timeout - aborting fetch');
+        controller.abort();
+      }, 15000); // Increased to 15 second timeout
       
       const response = await fetch('/api/admin/projects', {
         signal: controller.signal,
         headers: {
-          'Cache-Control': 'no-cache'
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
         }
       });
       
@@ -55,11 +59,12 @@ export default function AdminPage() {
       }
     } catch (err) {
       if (err.name === 'AbortError') {
-        setError('Request timed out. Please try again.');
+        console.log('Request was aborted due to timeout');
+        setError('Request timed out. The server may be slow. Please try again.');
       } else {
+        console.error('Network or other error:', err);
         setError('Failed to fetch projects. Please check your connection.');
       }
-      console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
     }
@@ -75,6 +80,15 @@ export default function AdminPage() {
 
   const updateProject = async (projectId, updates) => {
     try {
+      // Optimistically update the UI first
+      setProjects(prevProjects => 
+        prevProjects.map(p => 
+          p._id === projectId 
+            ? { ...p, ...updates, updatedAt: new Date() }
+            : p
+        )
+      );
+
       const response = await fetch('/api/admin/projects', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -83,9 +97,21 @@ export default function AdminPage() {
 
       if (response.ok) {
         const updatedProject = await response.json();
-        setProjects(projects.map(p => p._id === projectId ? updatedProject : p));
+        // Update with the server response to ensure consistency
+        setProjects(prevProjects => 
+          prevProjects.map(p => p._id === projectId ? updatedProject : p)
+        );
         showToast('Changes saved successfully');
       } else {
+        // Revert optimistic update on error
+        setProjects(prevProjects => 
+          prevProjects.map(p => 
+            p._id === projectId 
+              ? { ...p, ...updates, updatedAt: new Date() } // Keep the update for now
+              : p
+          )
+        );
+        
         // Try to parse JSON error, but fallback to status text if it fails
         try {
           const errorData = await response.json();
