@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-import { dbConnect } from "@/lib/dbConnect";
-import Project from "@/models/Project";
-import { getFallbackProjects, updateFallbackProject, reorderFallbackProjects } from "@/lib/fallbackData";
+import { dbConnect, query } from "@/lib/dbConnect";
 
 // GET all projects for admin management
 export async function GET() {
@@ -16,21 +14,31 @@ export async function GET() {
     }
 
     console.log("Session found, attempting database connection");
-    
+
     try {
-      console.log("🔗 Admin API: Attempting MongoDB connection...");
+      console.log("🔗 Admin API: Attempting PostgreSQL connection...");
       await dbConnect();
-      console.log("🔗 Admin API: MongoDB connected, fetching projects");
-      const mongoProjects = await Project.find().sort({ order: 1, createdAt: -1 }).lean();
-      console.log(`🔗 Admin API: Found ${mongoProjects.length} projects in MongoDB`);
-      return NextResponse.json(mongoProjects);
+      console.log("🔗 Admin API: PostgreSQL connected, fetching projects");
+      const result = await query('SELECT * FROM projects ORDER BY "order" ASC, created_at DESC');
+      const projects = result.rows.map(row => ({
+        _id: row._id,
+        slug: row.slug,
+        title: row.title,
+        summary: row.summary,
+        heroImage: row.hero_image,
+        status: row.status,
+        visible: row.visible,
+        order: row.order,
+        startDate: row.start_date,
+        endDate: row.end_date,
+        createdAt: row.created_at,
+        updatedAt: row.updated_at
+      }));
+      console.log(`🔗 Admin API: Found ${projects.length} projects in PostgreSQL`);
+      return NextResponse.json(projects);
     } catch (dbError) {
-      console.error("🔗 Admin API: MongoDB connection failed:", dbError.message);
-      console.error("🔗 Admin API: Using fallback data as last resort");
-      // Use fallback data only as a last resort
-      const fallbackProjects = getFallbackProjects();
-      console.log(`🔗 Admin API: Using ${fallbackProjects.length} fallback projects`);
-      return NextResponse.json(fallbackProjects);
+      console.error("🔗 Admin API: PostgreSQL connection failed:", dbError.message);
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
     }
   } catch (error) {
     console.error("Error fetching projects:", error);
@@ -47,11 +55,11 @@ export async function PATCH(request) {
     }
 
     const { projectId, updates } = await request.json();
-    
+
     // Only allow specific fields to be updated
     const allowedFields = ['visible', 'status', 'order', 'startDate', 'endDate'];
     const filteredUpdates = {};
-    
+
     for (const field of allowedFields) {
       if (updates.hasOwnProperty(field)) {
         filteredUpdates[field] = updates[field];
@@ -59,33 +67,76 @@ export async function PATCH(request) {
     }
 
     try {
-      console.log("🔗 Admin API: Attempting MongoDB connection for update...");
+      console.log("🔗 Admin API: Attempting PostgreSQL connection for update...");
       await dbConnect();
-      console.log("🔗 Admin API: MongoDB connected, updating project");
-      const updatedProject = await Project.findByIdAndUpdate(
-        projectId,
-        filteredUpdates,
-        { new: true, runValidators: true }
-      );
+      console.log("🔗 Admin API: PostgreSQL connected, updating project");
+      
+      // Build the SET clause for the UPDATE query
+      const setClause = [];
+      const values = [];
+      let paramCount = 1;
 
-      if (!updatedProject) {
+      if (filteredUpdates.visible !== undefined) {
+        setClause.push(`visible = $${paramCount++}`);
+        values.push(filteredUpdates.visible);
+      }
+      if (filteredUpdates.status !== undefined) {
+        setClause.push(`status = $${paramCount++}`);
+        values.push(filteredUpdates.status);
+      }
+      if (filteredUpdates.order !== undefined) {
+        setClause.push(`"order" = $${paramCount++}`);
+        values.push(filteredUpdates.order);
+      }
+      if (filteredUpdates.startDate !== undefined) {
+        setClause.push(`start_date = $${paramCount++}`);
+        values.push(filteredUpdates.startDate);
+      }
+      if (filteredUpdates.endDate !== undefined) {
+        setClause.push(`end_date = $${paramCount++}`);
+        values.push(filteredUpdates.endDate);
+      }
+
+      if (setClause.length === 0) {
+        return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
+      }
+
+      setClause.push(`updated_at = CURRENT_TIMESTAMP`);
+      values.push(projectId);
+
+      const updateQuery = `
+        UPDATE projects 
+        SET ${setClause.join(', ')} 
+        WHERE _id = $${paramCount}
+        RETURNING *
+      `;
+
+      const result = await query(updateQuery, values);
+
+      if (result.rows.length === 0) {
         return NextResponse.json({ error: "Project not found" }, { status: 404 });
       }
-      
-      console.log("✅ Admin API: Updated project in MongoDB");
+
+      const updatedProject = {
+        _id: result.rows[0]._id,
+        slug: result.rows[0].slug,
+        title: result.rows[0].title,
+        summary: result.rows[0].summary,
+        heroImage: result.rows[0].hero_image,
+        status: result.rows[0].status,
+        visible: result.rows[0].visible,
+        order: result.rows[0].order,
+        startDate: result.rows[0].start_date,
+        endDate: result.rows[0].end_date,
+        createdAt: result.rows[0].created_at,
+        updatedAt: result.rows[0].updated_at
+      };
+
+      console.log("✅ Admin API: Updated project in PostgreSQL");
       return NextResponse.json(updatedProject);
     } catch (dbError) {
-      console.error("🔗 Admin API: MongoDB connection failed:", dbError.message);
-      console.error("🔗 Admin API: Using fallback data as last resort");
-      // Use fallback data only as a last resort
-      const fallbackUpdatedProject = updateFallbackProject(projectId, filteredUpdates);
-      
-      if (!fallbackUpdatedProject) {
-        return NextResponse.json({ error: "Project not found" }, { status: 404 });
-      }
-      
-      console.log("✅ Admin API: Updated project in fallback data");
-      return NextResponse.json(fallbackUpdatedProject);
+      console.error("🔗 Admin API: PostgreSQL connection failed:", dbError.message);
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
     }
   } catch (error) {
     console.error("Error updating project:", error);
@@ -93,7 +144,7 @@ export async function PATCH(request) {
   }
 }
 
-// PATCH to reorder projects
+// PUT to reorder projects
 export async function PUT(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -104,21 +155,25 @@ export async function PUT(request) {
     const { projects } = await request.json();
     
     try {
+      console.log("🔗 Admin API: Attempting PostgreSQL connection for reorder...");
       await dbConnect();
+      console.log("🔗 Admin API: PostgreSQL connected, reordering projects");
       
       // Update order for all projects
       const updatePromises = projects.map((project, index) => 
-        Project.findByIdAndUpdate(project._id, { order: index })
+        query(
+          'UPDATE projects SET "order" = $1, updated_at = CURRENT_TIMESTAMP WHERE _id = $2',
+          [index, project._id]
+        )
       );
       
       await Promise.all(updatePromises);
       
+      console.log("✅ Admin API: Reordered projects in PostgreSQL");
       return NextResponse.json({ success: true });
     } catch (dbError) {
-      console.warn("MongoDB connection failed, using fallback data:", dbError.message);
-      // Fallback to local data when MongoDB is not available
-      reorderFallbackProjects(projects);
-      return NextResponse.json({ success: true });
+      console.error("🔗 Admin API: PostgreSQL connection failed:", dbError.message);
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
     }
   } catch (error) {
     console.error("Error reordering projects:", error);

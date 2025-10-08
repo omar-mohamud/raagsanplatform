@@ -1,23 +1,33 @@
-import { dbConnect } from "@/lib/dbConnect";
-import Project from "@/models/Project";
+import { dbConnect, query } from "@/lib/dbConnect";
 import Link from 'next/link';
 
 export default async function HomePage() {
   let projects = [];
   
   try {
-    console.log('🏠 Homepage: Attempting MongoDB connection...');
+    console.log('🏠 Homepage: Attempting PostgreSQL connection...');
     await dbConnect();
-    console.log('🏠 Homepage: MongoDB connected, fetching projects...');
-    projects = await Project.find({ visible: true }).sort({ order: 1, createdAt: -1 }).lean();
-    console.log(`🏠 Homepage: Found ${projects.length} projects in MongoDB`);
+    console.log('🏠 Homepage: PostgreSQL connected, fetching projects...');
+    const result = await query('SELECT * FROM projects WHERE visible = true ORDER BY "order" ASC, created_at DESC');
+    projects = result.rows.map(row => ({
+      _id: row._id,
+      slug: row.slug,
+      title: row.title,
+      summary: row.summary,
+      heroImage: row.hero_image,
+      status: row.status,
+      visible: row.visible,
+      order: row.order,
+      startDate: row.start_date,
+      endDate: row.end_date,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at
+    }));
+    console.log(`🏠 Homepage: Found ${projects.length} projects in PostgreSQL`);
   } catch (error) {
-    console.error('🏠 Homepage: MongoDB connection failed:', error.message);
-    console.error('🏠 Homepage: Using fallback data as last resort');
-    // Use fallback data only as a last resort
-    const { getFallbackProjects } = await import('@/lib/fallbackData');
-    projects = getFallbackProjects().filter(p => p.visible);
-    console.log(`🏠 Homepage: Using ${projects.length} fallback projects`);
+    console.error('🏠 Homepage: PostgreSQL connection failed:', error.message);
+    console.error('🏠 Homepage: No fallback data available');
+    projects = [];
   }
 
   return (

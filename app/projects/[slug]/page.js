@@ -1,6 +1,4 @@
-import { dbConnect } from "@/lib/dbConnect";
-import Project from "@/models/Project";
-import Story from "@/models/Story";
+import { dbConnect, query } from "@/lib/dbConnect";
 import Link from "next/link";
 
 export default async function ProjectPage({ params }) {
@@ -8,19 +6,32 @@ export default async function ProjectPage({ params }) {
   let project = null;
   
   try {
-    console.log(`📄 Project Page: Attempting MongoDB connection for ${slug}...`);
+    console.log(`📄 Project Page: Attempting PostgreSQL connection for ${slug}...`);
     await dbConnect();
-    console.log(`📄 Project Page: MongoDB connected, fetching project ${slug}`);
-    project = await Project.findOne({ slug }).lean();
-    console.log(`📄 Project Page: Found project in MongoDB:`, project ? 'Yes' : 'No');
+    console.log(`📄 Project Page: PostgreSQL connected, fetching project ${slug}`);
+    const result = await query('SELECT * FROM projects WHERE slug = $1', [slug]);
+    if (result.rows.length > 0) {
+      const row = result.rows[0];
+      project = {
+        _id: row._id,
+        slug: row.slug,
+        title: row.title,
+        summary: row.summary,
+        heroImage: row.hero_image,
+        status: row.status,
+        visible: row.visible,
+        order: row.order,
+        startDate: row.start_date,
+        endDate: row.end_date,
+        createdAt: row.created_at,
+        updatedAt: row.updated_at
+      };
+    }
+    console.log(`📄 Project Page: Found project in PostgreSQL:`, project ? 'Yes' : 'No');
   } catch (error) {
-    console.error(`📄 Project Page: MongoDB connection failed for ${slug}:`, error.message);
-    console.error(`📄 Project Page: Using fallback data as last resort`);
-    // Use fallback data only as a last resort
-    const { getFallbackProjects } = await import('@/lib/fallbackData');
-    const fallbackProjects = getFallbackProjects();
-    project = fallbackProjects.find(p => p.slug === slug);
-    console.log(`📄 Project Page: Found project in fallback data:`, project ? 'Yes' : 'No');
+    console.error(`📄 Project Page: PostgreSQL connection failed for ${slug}:`, error.message);
+    console.error(`📄 Project Page: No fallback data available`);
+    project = null;
   }
   
   if (!project) {
