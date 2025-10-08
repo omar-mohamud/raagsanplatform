@@ -6,19 +6,18 @@ export default async function HomePage() {
   let projects = [];
   
   try {
-    const connection = await dbConnect();
-    if (connection) {
-      projects = await Project.find({ visible: true }).sort({ order: 1, createdAt: -1 }).lean();
-    } else {
-      // Use fallback data when MongoDB is not available
-      const { getFallbackProjects } = await import('@/lib/fallbackData');
-      projects = getFallbackProjects().filter(p => p.visible);
-    }
+    console.log('🏠 Homepage: Attempting MongoDB connection...');
+    await dbConnect();
+    console.log('🏠 Homepage: MongoDB connected, fetching projects...');
+    projects = await Project.find({ visible: true }).sort({ order: 1, createdAt: -1 }).lean();
+    console.log(`🏠 Homepage: Found ${projects.length} projects in MongoDB`);
   } catch (error) {
-    console.warn('Database error, using fallback data:', error.message);
-    // Use fallback data when there's an error
+    console.error('🏠 Homepage: MongoDB connection failed:', error.message);
+    console.error('🏠 Homepage: Using fallback data as last resort');
+    // Use fallback data only as a last resort
     const { getFallbackProjects } = await import('@/lib/fallbackData');
     projects = getFallbackProjects().filter(p => p.visible);
+    console.log(`🏠 Homepage: Using ${projects.length} fallback projects`);
   }
 
   return (

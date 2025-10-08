@@ -16,17 +16,20 @@ export async function GET() {
     }
 
     console.log("Session found, attempting database connection");
+    
     try {
+      console.log("🔗 Admin API: Attempting MongoDB connection...");
       await dbConnect();
-      console.log("Database connected, fetching projects");
-      const projects = await Project.find().sort({ order: 1, createdAt: -1 }).lean();
-      console.log(`Found ${projects.length} projects in database`);
-      return NextResponse.json(projects);
+      console.log("🔗 Admin API: MongoDB connected, fetching projects");
+      const mongoProjects = await Project.find().sort({ order: 1, createdAt: -1 }).lean();
+      console.log(`🔗 Admin API: Found ${mongoProjects.length} projects in MongoDB`);
+      return NextResponse.json(mongoProjects);
     } catch (dbError) {
-      console.warn("MongoDB connection failed, using fallback data:", dbError.message);
-      // Fallback to local data when MongoDB is not available
+      console.error("🔗 Admin API: MongoDB connection failed:", dbError.message);
+      console.error("🔗 Admin API: Using fallback data as last resort");
+      // Use fallback data only as a last resort
       const fallbackProjects = getFallbackProjects();
-      console.log(`Using ${fallbackProjects.length} fallback projects`);
+      console.log(`🔗 Admin API: Using ${fallbackProjects.length} fallback projects`);
       return NextResponse.json(fallbackProjects);
     }
   } catch (error) {
@@ -56,7 +59,9 @@ export async function PATCH(request) {
     }
 
     try {
+      console.log("🔗 Admin API: Attempting MongoDB connection for update...");
       await dbConnect();
+      console.log("🔗 Admin API: MongoDB connected, updating project");
       const updatedProject = await Project.findByIdAndUpdate(
         projectId,
         filteredUpdates,
@@ -66,18 +71,21 @@ export async function PATCH(request) {
       if (!updatedProject) {
         return NextResponse.json({ error: "Project not found" }, { status: 404 });
       }
-
+      
+      console.log("✅ Admin API: Updated project in MongoDB");
       return NextResponse.json(updatedProject);
     } catch (dbError) {
-      console.warn("MongoDB connection failed, using fallback data:", dbError.message);
-      // Fallback to local data when MongoDB is not available
-      const updatedProject = updateFallbackProject(projectId, filteredUpdates);
+      console.error("🔗 Admin API: MongoDB connection failed:", dbError.message);
+      console.error("🔗 Admin API: Using fallback data as last resort");
+      // Use fallback data only as a last resort
+      const fallbackUpdatedProject = updateFallbackProject(projectId, filteredUpdates);
       
-      if (!updatedProject) {
+      if (!fallbackUpdatedProject) {
         return NextResponse.json({ error: "Project not found" }, { status: 404 });
       }
-
-      return NextResponse.json(updatedProject);
+      
+      console.log("✅ Admin API: Updated project in fallback data");
+      return NextResponse.json(fallbackUpdatedProject);
     }
   } catch (error) {
     console.error("Error updating project:", error);

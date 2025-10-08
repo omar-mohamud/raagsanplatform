@@ -8,21 +8,19 @@ export default async function ProjectPage({ params }) {
   let project = null;
   
   try {
-    const connection = await dbConnect();
-    if (connection) {
-      project = await Project.findOne({ slug }).lean();
-    } else {
-      // Use fallback data when MongoDB is not available
-      const { getFallbackProjects } = await import('@/lib/fallbackData');
-      const fallbackProjects = getFallbackProjects();
-      project = fallbackProjects.find(p => p.slug === slug);
-    }
+    console.log(`📄 Project Page: Attempting MongoDB connection for ${slug}...`);
+    await dbConnect();
+    console.log(`📄 Project Page: MongoDB connected, fetching project ${slug}`);
+    project = await Project.findOne({ slug }).lean();
+    console.log(`📄 Project Page: Found project in MongoDB:`, project ? 'Yes' : 'No');
   } catch (error) {
-    console.warn('Database error, using fallback data:', error.message);
-    // Use fallback data when there's an error
+    console.error(`📄 Project Page: MongoDB connection failed for ${slug}:`, error.message);
+    console.error(`📄 Project Page: Using fallback data as last resort`);
+    // Use fallback data only as a last resort
     const { getFallbackProjects } = await import('@/lib/fallbackData');
     const fallbackProjects = getFallbackProjects();
     project = fallbackProjects.find(p => p.slug === slug);
+    console.log(`📄 Project Page: Found project in fallback data:`, project ? 'Yes' : 'No');
   }
   
   if (!project) {
