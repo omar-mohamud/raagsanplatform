@@ -21,6 +21,9 @@ export async function GET() {
 
     try {
       console.log("🔗 Admin API: Attempting PostgreSQL connection...");
+      console.log("🔗 Admin API: NETLIFY_DATABASE_URL exists:", !!process.env.NETLIFY_DATABASE_URL);
+      console.log("🔗 Admin API: DATABASE_URL exists:", !!process.env.DATABASE_URL);
+      
       await dbConnect();
       console.log("🔗 Admin API: PostgreSQL connected, fetching projects");
       const result = await query('SELECT * FROM projects ORDER BY "order" ASC, created_at DESC');

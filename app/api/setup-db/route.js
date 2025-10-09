@@ -25,7 +25,17 @@ export async function POST() {
     try {
       // Read and execute the schema
       const schemaSql = fs.readFileSync(path.join(process.cwd(), 'lib', 'schema.sql'), 'utf8');
-      await pool.query(schemaSql);
+      
+      // Split the schema into individual statements and execute them
+      const statements = schemaSql.split(';').filter(stmt => stmt.trim().length > 0);
+      
+      for (const statement of statements) {
+        if (statement.trim()) {
+          console.log('Executing:', statement.trim().substring(0, 50) + '...');
+          await pool.query(statement.trim());
+        }
+      }
+      
       console.log('✅ Database schema created successfully!');
 
       // Check if projects table is empty and insert default data
@@ -77,9 +87,11 @@ export async function POST() {
 
     } catch (error) {
       console.error('❌ Database setup failed:', error.message);
+      console.error('❌ Full error:', error);
       return NextResponse.json({ 
         error: 'Database setup failed', 
-        details: error.message 
+        details: error.message,
+        fullError: error.toString()
       }, { status: 500 });
     } finally {
       await pool.end();
