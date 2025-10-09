@@ -279,6 +279,30 @@ p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
   .hero .kicker {
     font-size: 0.8rem;
   }
+  
+  /* Use even smaller image for very small mobile devices */
+  .hero-media {
+    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_600,f_auto,q_auto/raagsan/sepow/hero");
+  }
+}
+
+/* High-DPI displays (retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-media {
+    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1600,f_auto,q_auto/raagsan/sepow/hero");
+  }
+  
+  @media (max-width: 768px) {
+    .hero-media {
+      background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1200,f_auto,q_auto/raagsan/sepow/hero");
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-media {
+      background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/hero");
+    }
+  }
 }
 
 /* Who we are section - Updated to force grey gradient background */
@@ -2058,6 +2082,8 @@ figcaption {
     background-attachment: scroll;
     background-size: cover;
     background-position: center center;
+    /* Use medium-sized image for tablets */
+    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1200,f_auto,q_auto/raagsan/sepow/hero");
   }
   
   /* Ensure hero text is readable on mobile */
