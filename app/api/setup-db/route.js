@@ -7,8 +7,8 @@ export async function POST() {
   try {
     console.log('🔧 Setting up Netlify Neon database...');
     
-    // Use Netlify database URL if available, otherwise fall back to DATABASE_URL
-    const DATABASE_URL = process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL;
+    // Use DATABASE_URL (Supabase) as primary, Netlify as fallback
+    const DATABASE_URL = process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL;
     
     if (!DATABASE_URL) {
       console.error('❌ No database URL found in environment variables');
