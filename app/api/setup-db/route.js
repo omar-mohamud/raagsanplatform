@@ -26,15 +26,9 @@ export async function POST() {
       // Read and execute the schema
       const schemaSql = fs.readFileSync(path.join(process.cwd(), 'lib', 'schema.sql'), 'utf8');
       
-      // Split the schema into individual statements and execute them
-      const statements = schemaSql.split(';').filter(stmt => stmt.trim().length > 0);
-      
-      for (const statement of statements) {
-        if (statement.trim()) {
-          console.log('Executing:', statement.trim().substring(0, 50) + '...');
-          await pool.query(statement.trim());
-        }
-      }
+      // Execute the entire schema as one statement
+      console.log('Executing database schema...');
+      await pool.query(schemaSql);
       
       console.log('✅ Database schema created successfully!');
 
