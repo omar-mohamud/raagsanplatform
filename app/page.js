@@ -1,6 +1,10 @@
 import { dbConnect, query } from "@/lib/dbConnect";
 import Link from 'next/link';
 
+// Disable caching for this page to ensure fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function HomePage() {
   let projects = [];
   

@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { dbConnect, query } from "@/lib/dbConnect";
 
+// Disable caching for admin API
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // GET all projects for admin management
 export async function GET() {
   try {
