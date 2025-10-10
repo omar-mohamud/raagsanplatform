@@ -2400,11 +2400,18 @@ figcaption {
   
   /* Fix hero background on mobile */
   .hero-media {
-    background-attachment: scroll;
-    background-size: cover;
-    background-position: center center;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
     /* Use medium-sized image for tablets */
-    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1200,f_auto,q_auto/raagsan/sepow/hero");
+    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_1200,f_auto,q_auto/raagsan/sepow/hero") !important;
+  }
+  
+  /* Fix project page background on mobile */
+  .project-page .page-bg {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
   
   /* Ensure hero text is readable on mobile */
@@ -2422,5 +2429,32 @@ figcaption {
     hyphens: none;
     word-break: keep-all;
     overflow-wrap: break-word;
+  }
+}
+
+/* Additional mobile fixes for very small screens (phones) */
+@media (max-width: 480px) {
+  .hero-media {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    /* Use smaller image for phones */
+    background-image: url("https://res.cloudinary.com/dxcjrsrna/image/upload/w_800,f_auto,q_auto/raagsan/sepow/hero") !important;
+  }
+  
+  .project-page .page-bg {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+  
+  .hero .h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  .hero .lead {
+    font-size: 0.9rem;
+    line-height: 1.3;
   }
 }
