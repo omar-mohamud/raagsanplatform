@@ -1901,7 +1901,6 @@ p {
   .homepage-project-card:hover {
     transform: none;
   }
-}
 
 /* Viewport and layout optimizations */
 @media (max-width: 320px) {
