@@ -24,20 +24,19 @@ export default function GlobalNav() {
         {/* Desktop Navigation */}
         <div className="nav-links desktop-nav">
           <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>Home</Link>
-          <Link href="/#projects" className={`nav-link ${pathname === '/projects' ? 'active' : ''}`}>Projects</Link>
-          <Link href="/#about" className="nav-link">About</Link>
-          <Link href="/admin/login" className="nav-link">Login</Link>
+          <Link href="/#projects" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>Projects</Link>
+          <Link href="/#about" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>About</Link>
         </div>
         
         <div className="nav-right">
           {isProjectPage && (
             <Link href="/" className="nav-link nav-back-link">
-              ← back
+              ← Back
             </Link>
           )}
           {!isHomePage && !isProjectPage && (
             <Link href="/" className="nav-link nav-back-link">
-              ← Back to Homepage
+              ← Back
             </Link>
           )}
           {/* Hidden admin access - only visible to those who know where to look */}
