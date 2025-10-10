@@ -41,7 +41,7 @@ export default function GlobalNav() {
             </Link>
           )}
           {/* Hidden admin access - only visible to those who know where to look */}
-          <Link href="/admin" className="nav-link admin-link" title="Admin Access">
+          <Link href="/admin/login" className="nav-link admin-link" title="Admin Access">
             ⚙️
           </Link>
           
@@ -72,9 +72,6 @@ export default function GlobalNav() {
           </Link>
           <Link href="/#about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
             About
-          </Link>
-          <Link href="/admin/login" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-            Login
           </Link>
         </div>
       </div>
