@@ -1,0 +1,68 @@
+================================================================
+VERCEL ENVIRONMENT VARIABLES - Copy these to Vercel Dashboard
+================================================================
+
+📋 Go to: https://vercel.com/your-project/settings/environment-variables
+
+Add each of these variables:
+
+-----------------------------------------------------------
+DATABASE CONNECTION (Supabase PostgreSQL)
+-----------------------------------------------------------
+Name: DATABASE_URL
+Value: postgresql://postgres.sohfsthjqqhweellgwup:Omar0610%24%26%40@aws-1-eu-north-1.pooler.supabase.com:6543/postgres
+
+-----------------------------------------------------------
+SUPABASE API (Optional - for future use)
+-----------------------------------------------------------
+Name: SUPABASE_URL
+Value: https://sohfsthjqqhweellgwup.supabase.co
+
+Name: SUPABASE_ANON_KEY
+Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvaGZzdGhqcXFod2VlbGxnd3VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3OTAyMTQsImV4cCI6MjA3NTM2NjIxNH0.W6KtG9v1W4Aw9ANrDkbzuTJkCIJKZXRAhaqp1YfNTbw
+
+-----------------------------------------------------------
+CLOUDINARY (Image Hosting)
+-----------------------------------------------------------
+Name: CLOUDINARY_CLOUD_NAME
+Value: dxcjrsrna
+
+Name: CLOUDINARY_API_KEY
+Value: 274957449627149
+
+Name: CLOUDINARY_API_SECRET
+Value: 4rLD9otXD54pr_q4iIV6PqET9Cs
+
+-----------------------------------------------------------
+NEXTAUTH (Authentication)
+-----------------------------------------------------------
+Name: NEXTAUTH_SECRET
+Value: 9c4339fc-439f-464f-98b8-63ad07be4de629ddcd32-c77b-43cb-b5da-7af57d33dfd9
+
+Name: NEXTAUTH_URL
+Value: https://YOUR-PROJECT-NAME.vercel.app
+⚠️ IMPORTANT: Update this after first deployment with your actual Vercel URL!
+
+-----------------------------------------------------------
+ADMIN CREDENTIALS
+-----------------------------------------------------------
+Name: ADMIN_USER
+Value: admin
+
+Name: ADMIN_PASS
+Value: admin_123
+
+================================================================
+DEPLOYMENT STEPS:
+================================================================
+
+1. Go to https://vercel.com and sign in with GitHub
+2. Click "Add New..." → "Project"
+3. Import your repository: omar-mohamud/raagsanplatform
+4. Add all the environment variables above
+5. Click "Deploy"
+6. After deployment, update NEXTAUTH_URL with your actual Vercel URL
+7. Visit https://your-vercel-url.vercel.app/api/setup-db to initialize database
+
+================================================================
+
