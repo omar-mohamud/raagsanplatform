@@ -4,13 +4,13 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "env": {
-    "MONGODB_URI": "@mongodb_uri",
+    "DATABASE_URL": "@database_url",
     "NEXTAUTH_SECRET": "@nextauth_secret",
     "NEXTAUTH_URL": "@nextauth_url",
-    "ADMIN_TOKEN": "@admin_token",
+    "ADMIN_USER": "@admin_user",
+    "ADMIN_PASS": "@admin_pass",
     "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
     "CLOUDINARY_API_KEY": "@cloudinary_api_key",
     "CLOUDINARY_API_SECRET": "@cloudinary_api_secret"
   }
 }
-
