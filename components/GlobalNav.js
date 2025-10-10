@@ -63,15 +63,39 @@ export default function GlobalNav() {
       {/* Mobile Navigation Menu */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-links">
-          <Link href="/" className={`mobile-nav-link ${pathname === '/' ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+          <Link 
+            href="/" 
+            className={`mobile-nav-link ${pathname === '/' ? 'active' : ''}`} 
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Home
           </Link>
-          <Link href="/#projects" className={`mobile-nav-link ${pathname === '/projects' ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}>
+          <a 
+            href="#projects" 
+            className="mobile-nav-link" 
+            onClick={(e) => {
+              setIsMobileMenuOpen(false);
+              if (pathname !== '/') {
+                e.preventDefault();
+                window.location.href = '/#projects';
+              }
+            }}
+          >
             Projects
-          </Link>
-          <Link href="/#about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+          </a>
+          <a 
+            href="#about" 
+            className="mobile-nav-link" 
+            onClick={(e) => {
+              setIsMobileMenuOpen(false);
+              if (pathname !== '/') {
+                e.preventDefault();
+                window.location.href = '/#about';
+              }
+            }}
+          >
             About
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
