@@ -10,13 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "echo 'no linter configured'",
-    "import:folder": "node scripts/import_from_folder.js",
-    "import:sepow": "node scripts/import_from_folder.js ./sepow_photos sepow 'SEPOW Photos' gallery",
-    "seed:sepow:headings": "node scripts/add_sepow_headings.js",
-    "fix:sepow": "node scripts/fix_sepow_story.js",
-    "seed:sepow:content": "node scripts/seed_sepow_content.js",
-    "seed:sepow:real": "node scripts/add_sepow_real_content.js"
+    "lint": "echo 'no linter configured'"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +19,6 @@
     "@types/pg": "^8.15.5",
     "cloudinary": "^2.7.0",
     "dotenv": "^16.6.1",
-    "mongoose": "^8.19.0",
     "next": "^15.5.4",
     "next-auth": "^4.24.11",
     "pg": "^8.16.3",
